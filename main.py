@@ -1,5 +1,4 @@
 from fastapi import FastAPI, UploadFile, File
-import os
 
 app = FastAPI()
 
@@ -94,35 +93,3 @@ async def review(file: UploadFile = File(...)):
             "Follow REST API best practices"
         ]
     }
-
-
-# Report API
-@app.post("/report/")
-async def report(file: UploadFile = File(...)):
-    content = await file.read()
-    code = content.decode("utf-8")
-
-    passed, issues, score = analyze_code(code)
-
-    report_text = f"""
-API REVIEW BOT - CODE REVIEW REPORT
-=====================================
-Filename: {file.filename}
-Score: {score}/10
-
-PASSED CHECKS:
-{chr(10).join(passed)}
-
-ISSUES FOUND:
-{chr(10).join(issues) if issues else "No issues found"}
-
-SUGGESTIONS:
-- Use try-except for error handling
-- Validate all user inputs
-- Return proper HTTP status codes
-- Add authentication if needed
-- Follow REST API best practicesgit add .
-=====================================
-    """
-
-    return {"report": report_text}

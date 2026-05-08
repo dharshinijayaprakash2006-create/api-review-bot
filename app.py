@@ -6,10 +6,10 @@ st.set_page_config(page_title="API Review Bot", page_icon="🤖")
 st.title("🤖 API Review Bot")
 st.subheader("Upload your FastAPI code and get instant review!")
 
-file = st.file_uploader("📂 Upload your Python file (.py)", type=["py"])
+file = st.file_uploader("Upload your Python file (.py)", type=["py"])
 
 if file:
-    st.success(f"✅ File uploaded: {file.name}")
+    st.success(f" File uploaded: {file.name}")
 
     code_content = file.read().decode("utf-8")
     st.subheader("📄 Code Preview:")
